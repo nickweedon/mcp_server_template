@@ -2,6 +2,35 @@
 
 This document provides context and guidelines for Claude when working with this MCP server project.
 
+## ⚠️ CRITICAL: Research Approach
+
+**ALWAYS use the Playwright MCP server for web research when working on this project.**
+
+When you need to research ANY topic related to implementing or customizing this MCP server:
+
+- ✅ **DO**: Use Playwright MCP browser tools (`browser_navigate`, `browser_snapshot`, `browser_click`, etc.) for all web research
+- ❌ **DON'T**: Use the Task tool with `claude-code-guide` subagent (that's ONLY for Claude Code documentation)
+- ❌ **DON'T**: Use WebSearch or WebFetch as your first choice
+- ⚠️ **FALLBACK**: Only use WebSearch, WebFetch, or similar tools when Playwright cannot work due to:
+  - CAPTCHAs blocking access
+  - Login walls or paywalls
+  - Other technical barriers that prevent browser automation
+
+The Playwright MCP server offers more sophisticated methods for searching the web, including the ability to operate single-page web applications, interact with dynamic content, and navigate complex websites.
+
+**Example workflow**: When researching an API like Nexar:
+1. Navigate to Google: `browser_navigate` to https://www.google.com
+2. Search for the topic: `browser_type` to enter search terms
+3. Click on results: `browser_click` on relevant links
+4. Read documentation: `browser_snapshot` to capture page content
+5. Navigate through docs: Continue using browser tools to explore
+
+**When to fall back to WebSearch/WebFetch**:
+- If you encounter "Access Denied" or CAPTCHA messages
+- If authentication is required and cannot be bypassed
+- If the site explicitly blocks automated browsers
+- Only after attempting with Playwright first
+
 ## Project Overview
 
 This is a skeleton MCP (Model Context Protocol) server built with Python and FastMCP. It serves as a template for creating new MCP servers that can integrate with Claude Desktop and other MCP clients.
